@@ -1,0 +1,23 @@
+﻿@model StudentBookMapping
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        
+            <p>Are u sure, you want delete this?</p>
+
+
+            <form action="/StudentBookMapping/DeleteConfirm/@Model.Id" method="post">
+                <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>Delete</button>
+            </form>
+
+        </div>
+    </div>
+
+
+
+

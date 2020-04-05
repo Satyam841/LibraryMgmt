@@ -1,0 +1,72 @@
+﻿@model IList<StudentBookMapping>
+
+@{
+    ViewBag.Title = "IndexTableView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-4">
+            <form action="/StudentBookMapping/IssueBook" method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <input type="hidden" id="StudentId" name="StudentId" class="form-control" value="@ViewBag.StudentId" />
+                </div>
+                <div class="form-group">
+                    <label>Enter Book Code</label>
+                    <input type="text" id="BookId" name="BookId" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>From</label>
+                    <input type="text" disabled class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="form-group">
+                    <label>To</label>
+                    <input type="date" id="ToDate" name="ToDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save-file"></i> Release</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Book Name</th>
+                            <th>Issue Date</th>
+                            <th>Due Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    @if (Model != null)
+                    {
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Book.Name</td>
+                                    <td>@item.IssueDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@item.DueDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>
+                                        
+                                            <a href="/StudentBookMapping/Delete/@item.Id">
+                                                <i class="glyphicon glyphicon-remove"></i>Delete
+                                            </a>
+                                        
+                                        <a href="#" class="btn btn-warning">
+                                            <i class="glyphicon glyphicon-eject"></i>Return
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
