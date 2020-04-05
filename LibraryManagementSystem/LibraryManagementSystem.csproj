@@ -167,7 +167,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="BookReleaseModel.cs" />
+    <Compile Include="Models\ViewModels\BookReleaseModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
@@ -210,7 +210,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="StudentSearchViewModel.cs" />
+    <Compile Include="Models\ViewModels\StudentSearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\LibraryManagementSystem.mdf" />
