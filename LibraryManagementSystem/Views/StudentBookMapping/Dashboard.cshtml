@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DASHBOARD</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="img-circle">
+                <h2> <u>Students Info's</u></h2>
+                <p>Total Students:@ViewBag.TotalStudents</p>
+                <a href="~/Students/Index/">View List</a>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <h2><u>Books Info's</u></h2>
+            <p>Total Books:@ViewBag.TotalBooks</p>
+            <a href="~/Books/Index/">View List</a>
+
+        </div>  
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Recently Issued Book</h2>
+        </div>
+        <div class="col-lg-6">
+            <h2>Returning List</h2>
+        </div>
+    </div>
+
+</div>
+

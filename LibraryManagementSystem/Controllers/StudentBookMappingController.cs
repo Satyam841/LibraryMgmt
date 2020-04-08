@@ -107,5 +107,17 @@ namespace LibraryManagementSystem.Controllers
             return RedirectToAction("TableView", new { Id = book.StudentId });
         }
 
+
+
+        public ActionResult Dashboard()
+        {
+            IList<Book> bookList = db.Books.ToList();
+            IList<Student> studentList = db.Students.ToList();
+
+            ViewBag.TotalBooks = bookList.Count();
+            ViewBag.TotalStudents = studentList.Count();
+
+            return View();
+        }
     }
 }

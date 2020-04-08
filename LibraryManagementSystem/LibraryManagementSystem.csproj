@@ -217,12 +217,14 @@
     <Content Include="App_Data\LibraryManagementSystem_log.ldf">
       <DependentUpon>LibraryManagementSystem.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\Images\bks.jpg" />
     <Content Include="Content\Images\download.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\logo.jpg" />
+    <Content Include="Content\Images\St.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -314,6 +316,7 @@
     <Content Include="Views\StudentBookMapping\Index.cshtml" />
     <Content Include="Views\StudentBookMapping\TableView.cshtml" />
     <Content Include="Views\StudentBookMapping\Delete.cshtml" />
+    <Content Include="Views\StudentBookMapping\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
