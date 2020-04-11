@@ -11,11 +11,13 @@ using LibraryManagementSystem.Models;
 
 namespace LibraryManagementSystem.Controllers
 {
+    [Authorize]
     public class StudentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Students
+      
         public ActionResult Index()
         {
             var students = db.Students.Include(s => s.Department).Include(s => s.Semester).Include(s => s.Session);

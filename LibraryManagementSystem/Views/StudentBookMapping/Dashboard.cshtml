@@ -1,37 +1,114 @@
-﻿
+﻿@model IList<StudentBookMapping>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DASHBOARD</h2>
+<h2 class="glyphicon-text-color-blue">DASHBOARD</h2>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="img-circle">
-                <h2> <u>Students Info's</u></h2>
-                <p>Total Students:@ViewBag.TotalStudents</p>
-                <a href="~/Students/Index/">View List</a>
+    <div class="row ">
+        <div class="col-lg-4 table-bordered">
+            <div class="card ">
+                <h2 class="card-header glyphicon glyphicon-user">Students </h2>
+                <div class="card-body">
+                    <h4 class="card-title">Total Students:</h4>
+                    <p class="card-text">@ViewBag.TotalStudents</p>
+                    <a href="~/Students/Index/" class="btn btn-primary">View List</a>
+                </div>
             </div>
+        </div>
+        <div class="col-lg-1">
 
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-4 table-bordered table-hover">
 
-            <h2><u>Books Info's</u></h2>
-            <p>Total Books:@ViewBag.TotalBooks</p>
-            <a href="~/Books/Index/">View List</a>
-
-        </div>  
+            <div class="card">
+                <h2 class="card-header glyphicon glyphicon-book">Books </h2>
+                <div class="card-body">
+                    <h4 class="card-title">Total Books:</h4>
+                    <p class="card-text">@ViewBag.TotalBooks</p>
+                    <a href="~/Books/Index/" class="btn btn-primary">View List</a>
+                </div>
+            </div>
+        </div>
 
     </div>
+    <br />
     <div class="row">
-        <div class="col-lg-6">
-            <h2>Recently Issued Book</h2>
+        <div class="col-lg-4  table-bordered">
+            <div class="card">
+                <h2 class="card-header glyphicon glyphicon-hand-down">Today's</h2>
+                <div class="card-body">
+                    <h4 class="card-title">List:</h4>
+                    <table class="table-striped">
+
+                        <tr>
+                            <th>Book</th>
+                            <th>Name</th>
+                            <th>RollNo</th>
+
+                        </tr>
+
+
+                        @foreach (var item in Model)
+                        {
+                            if (item.DueDate == DateTime.Today)
+                            {
+                                <tr>
+                                    <td>@item.Book.Name </td>
+                                    <td>@item.Student.Name</td>
+                                    <td>@item.Student.Rollno</td>
+
+                                </tr>
+
+                            }
+                        }
+                    </table>
+                   
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6">
-            <h2>Returning List</h2>
+        <div class="col-lg-1">
+
         </div>
+
+        <div class="col-lg-4 table-bordered">
+
+            <div class="card">
+                <h2 class="card-header glyphicon glyphicon-list">Return</h2>
+                <div class="card-body">
+                    <h4 class="card-title">List:</h4>
+                    <table class="table-striped">
+
+                        <tr>
+                            <th>Book</th>
+                            <th>Name</th>
+                            <th>RollNo</th>
+
+                        </tr>
+
+
+                        @foreach (var item in Model)
+                        {
+                            if (item.DueDate == DateTime.Today)
+                            {
+                                <tr>
+                                    <td>@item.Book.Name </td>
+                                    <td>@item.Student.Name</td>
+                                    <td>@item.Student.Rollno</td>
+
+                                </tr>
+
+                            }
+                        }
+
+                    </table>
+                  
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

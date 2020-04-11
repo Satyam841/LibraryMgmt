@@ -8,7 +8,8 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-lg-4">
+        <br />
+        <div class="col-lg-3 table-bordered">
             <form action="/StudentBookMapping/IssueBook" method="post">
                 @Html.AntiForgeryToken()
                 <div class="form-group">
@@ -31,6 +32,7 @@
                 </div>
             </form>
         </div>
+      <div class="col-lg-1"></div>
         <div class="col-lg-8">
             <div class="row">
                 <table class="table table-bordered table-striped">
@@ -39,6 +41,8 @@
                             <th>Book Name</th>
                             <th>Issue Date</th>
                             <th>Due Date</th>
+                            <th>Submission Date</th>
+                            <th>Fine</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -51,15 +55,20 @@
                                     <td>@item.Book.Name</td>
                                     <td>@item.IssueDate.ToString("dd-MMM-yyyy")</td>
                                     <td>@item.DueDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@item.SubmissioDate </td>
+                                    <td>@item.Fine </td>
                                     <td>
-                                        
-                                            <a href="/StudentBookMapping/Delete/@item.Id">
-                                                <i class="glyphicon glyphicon-remove"></i>Delete
+                                        @if (item.SubmissioDate == null)
+                                        {
+                                            <a href="/StudentBookMapping/Delete/@item.Id" class="btn btn-danger btn-xs">
+                                                <i class="glyphicon glyphicon-trash"></i>Delete
                                             </a>
-                                        
-                                        <a href="#" class="btn btn-warning">
-                                            <i class="glyphicon glyphicon-eject"></i>Return
-                                        </a>
+
+                                            <a href="/StudentBookMapping/ReturnBook/@item.Id" class="btn btn-warning btn-xs">
+                                                <i class="glyphicon glyphicon-eject"></i>Return
+                                            </a>
+                                        }
+
                                     </td>
                                 </tr>
                             }

@@ -7,50 +7,62 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-4">
-            @using (Html.BeginForm("Index", "StudentBookMapping", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                <div class="form-group">
-                    <label>Select Course</label>
-                    @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Select Department</label>
-                    @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Select Semester</label>
-                    @Html.DropDownList("SemesterId", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Select Session</label>
-                    @Html.DropDownList("SessionId", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Enter Roll number</label>
-                    <input type="text" id="RollNo" name="RollNo" class="form-control input-sm" placeholder="Enter Roll no " />
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i>Search</button>
-                    <button class="btn btn-danger" type="reset"><i class="glyphicon glyphicon-remove-sign"></i>Reset</button>
-                </div>
-            }
-        </div>
-        <div class="col-lg-8">
-            @if (Model != null)
-            {
-                <div class="card">
-                    <h2><i class="glyphicon glyphicon-user"></i>@Model.Name</h2>
-                    <p><b>Roll Number:</b>@Model.Rollno</p>
-                    <p><b>Department: </b>@Model.Department.Tittle</p>
-                    <p><b>Session: </b>@Model.Session.SessionTitle</p>
-                    <p><b>Semester: </b>@Model.Semester.Title</p>
-                    <a href="/StudentBookMapping/TableView/@Model.Id">Go to panel</a>
-                </div>
-            }
-         
-        </div>
+        <section>
+            <h3>Student Search Panel</h3>
+            <div class="col-lg-4">
+                @using (Html.BeginForm("Index", "StudentBookMapping", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Select Department</label>
+                        @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Select Semester</label>
+                        @Html.DropDownList("SemesterId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Select Session</label>
+                        @Html.DropDownList("SessionId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Roll number</label>
+                        <input type="text" id="RollNo" name="RollNo" class="form-control input-sm" placeholder="Enter Roll no " />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i>Search</button>
+                        <button class="btn btn-danger" type="reset"><i class="glyphicon glyphicon-remove-sign"></i>Reset</button>
+                    </div>
+                }
+            </div>
+        </section>
+        <section>
+           
+            <div class="col-lg-4 table-bordered">
+                @if (Model != null)
+                {
+                    <div class="card">
+                        <h2 class="card-header"><i class="glyphicon glyphicon-user"></i>@Model.Name</h2>
+                        <div class="card-body">
+                            <p><b>Roll Number:</b>@Model.Rollno</p>
+                            <p><b>Department: </b>@Model.Department.Tittle</p>
+                            <p><b>Session: </b>@Model.Session.SessionTitle</p>
+                            <p><b>Semester: </b>@Model.Semester.Title</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="/StudentBookMapping/TableView/@Model.Id" class="btn btn-warning btn-xs">Details</a>
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+        </section>
 
     </div>
 

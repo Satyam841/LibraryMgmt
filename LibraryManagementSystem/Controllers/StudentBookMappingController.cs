@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace LibraryManagementSystem.Controllers
 {
+    [Authorize]
     public class StudentBookMappingController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -38,7 +39,7 @@ namespace LibraryManagementSystem.Controllers
         }
 
         /// <summary>
-        /// Student library view
+        /// Student library view   
         /// </summary>
         /// <param name="Id">Student Id</param>
         /// <returns></returns>
@@ -86,7 +87,7 @@ namespace LibraryManagementSystem.Controllers
             if (bookMapping != null)
             {
                 return View(bookMapping);
-               
+
             }
             return RedirectToAction("Index");
 
@@ -108,7 +109,38 @@ namespace LibraryManagementSystem.Controllers
         }
 
 
+        public ActionResult ReturnBook(int id)
+        {
+            StudentBookMapping studentBook = db.StudentBookMappings.Find(id);
+            studentBook.SubmissioDate = DateTime.Now;
+            studentBook.Fine = CalculateFine(studentBook.DueDate, (DateTime)studentBook.SubmissioDate);
+            db.Entry(studentBook).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("TableView", new { Id = studentBook.StudentId });
+        }
 
+        public int CalculateFine(DateTime DueDate, DateTime SubmissioDate)
+        {
+         
+
+
+                var days = SubmissioDate.Subtract(DueDate).TotalDays;
+
+                if (days > 0)
+                {
+                    var amount = 5 * days;
+
+                    return (int)amount;
+                }
+           
+
+            //Find how many days have been exceed 
+            //no of exceed day * 5  
+            //return amount
+            return 0;
+        }
+
+   
         public ActionResult Dashboard()
         {
             IList<Book> bookList = db.Books.ToList();
@@ -117,7 +149,10 @@ namespace LibraryManagementSystem.Controllers
             ViewBag.TotalBooks = bookList.Count();
             ViewBag.TotalStudents = studentList.Count();
 
-            return View();
+            IList<StudentBookMapping> studentBooks = db.StudentBookMappings.Include("Book").Include("Student").ToList();
+
+            return View(studentBooks);
         }
     }
 }
+

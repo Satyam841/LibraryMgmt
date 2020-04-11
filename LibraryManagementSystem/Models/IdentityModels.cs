@@ -25,7 +25,7 @@ namespace LibraryManagementSystem.Models
         {
         }
 
-        public IDbSet<Book> Books { get; set; } 
+        public IDbSet<Book> Books { get; set; }
 
         public IDbSet<Courses> Courses { get; set; }
 
