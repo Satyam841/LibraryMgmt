@@ -36,36 +36,30 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-lg-4  table-bordered">
+        <div class="col-lg-4  table-bordered small pre-scrollable ">
             <div class="card">
                 <h2 class="card-header glyphicon glyphicon-hand-down">Today's</h2>
                 <div class="card-body">
                     <h4 class="card-title">List:</h4>
                     <table class="table-striped">
-
                         <tr>
                             <th>Book</th>
                             <th>Name</th>
                             <th>RollNo</th>
 
                         </tr>
-
-
-                        @foreach (var item in Model)
+                        @foreach (var item in ViewBag.TodaysBookRelease)
                         {
-                            if (item.DueDate == DateTime.Today)
-                            {
-                                <tr>
-                                    <td>@item.Book.Name </td>
-                                    <td>@item.Student.Name</td>
-                                    <td>@item.Student.Rollno</td>
+                            <tr>
 
-                                </tr>
+                                <td>@item.Book.Name </td>
+                                <td>@item.Student.Name</td>
+                                <td>@item.Student.Rollno</td>
 
-                            }
+                            </tr>
                         }
                     </table>
-                   
+
                 </div>
             </div>
         </div>
@@ -73,7 +67,7 @@
 
         </div>
 
-        <div class="col-lg-4 table-bordered">
+        <div class="col-lg-4 table-bordered pre-scrollable">
 
             <div class="card">
                 <h2 class="card-header glyphicon glyphicon-list">Return</h2>
@@ -89,22 +83,20 @@
                         </tr>
 
 
-                        @foreach (var item in Model)
+                        @foreach (var item in ViewBag.TodaysBookReturn)
                         {
-                            if (item.DueDate == DateTime.Today)
-                            {
-                                <tr>
-                                    <td>@item.Book.Name </td>
-                                    <td>@item.Student.Name</td>
-                                    <td>@item.Student.Rollno</td>
+                            <tr>
+                                <td>@item.Book.Name</td>
+                                <td>@item.Student.Name</td>
+                                <td>@item.Student.Rollno</td>
+                                <td><a href="/StudentBookMapping/TableView/@item.StudentId">Go</a></td>
+                            </tr>
 
-                                </tr>
-
-                            }
                         }
 
+
                     </table>
-                  
+
                 </div>
             </div>
         </div>

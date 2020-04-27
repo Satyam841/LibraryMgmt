@@ -7,6 +7,8 @@ namespace LibraryManagementSystem
 {
     public class StudentSearchViewModel
     {
+        public int Id { get; set; }
+
         public int CourseId { get; set; }
 
         public int DepartmentId { get; set; }

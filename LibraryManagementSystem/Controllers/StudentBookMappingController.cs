@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace LibraryManagementSystem.Controllers
 {
-    [Authorize]
+
     public class StudentBookMappingController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -31,8 +31,7 @@ namespace LibraryManagementSystem.Controllers
             ViewBag.SessionId = new SelectList(db.Sessions, "Id", "SessionTitle", db.Sessions.Where(a => a.Id == searchViewModel.SessionId));
 
             Student student = db.Students.Include("Department").Include("Session").Include("Semester")
-                .Where(a => a.DepartmentId == searchViewModel.DepartmentId && a.SessionId == searchViewModel.SessionId
-                            && a.SemesterId == searchViewModel.SemesterId && a.Rollno == searchViewModel.RollNo).FirstOrDefault();
+                .Where(a => a.Rollno == searchViewModel.RollNo).FirstOrDefault();
 
 
             return View(student);
@@ -65,7 +64,7 @@ namespace LibraryManagementSystem.Controllers
                 {
                     BookId = existingBook.Id,
                     StudentId = bookReleaseModel.StudentId,
-                    IssueDate = DateTime.Now,
+                    IssueDate = DateTime.Now.Date,
                     DueDate = bookReleaseModel.ToDate,
                     SubmissioDate = null
                 };
@@ -121,18 +120,18 @@ namespace LibraryManagementSystem.Controllers
 
         public int CalculateFine(DateTime DueDate, DateTime SubmissioDate)
         {
-         
 
 
-                var days = SubmissioDate.Subtract(DueDate).TotalDays;
 
-                if (days > 0)
-                {
-                    var amount = 5 * days;
+            var days = SubmissioDate.Subtract(DueDate).TotalDays;
 
-                    return (int)amount;
-                }
-           
+            if (days > 0)
+            {
+                var amount = 5 * days;
+
+                return (int)amount;
+            }
+
 
             //Find how many days have been exceed 
             //no of exceed day * 5  
@@ -140,19 +139,38 @@ namespace LibraryManagementSystem.Controllers
             return 0;
         }
 
-   
+
         public ActionResult Dashboard()
         {
-            IList<Book> bookList = db.Books.ToList();
-            IList<Student> studentList = db.Students.ToList();
+            ViewBag.TotalBooks = db.Books.Count();
+            ViewBag.TotalStudents = db.Students.Count();
 
-            ViewBag.TotalBooks = bookList.Count();
-            ViewBag.TotalStudents = studentList.Count();
+            IList<StudentBookMapping> TodaysList = db.StudentBookMappings.Include("Student").
+                Where(a => a.IssueDate == DateTime.Now).ToList();
 
-            IList<StudentBookMapping> studentBooks = db.StudentBookMappings.Include("Book").Include("Student").ToList();
+            ViewBag.TodaysBookRelease = TodaysList;
 
-            return View(studentBooks);
+            IList<StudentBookMapping> ReturnList = db.StudentBookMappings.Include("Student").Include("Book").
+                Where(a => a.DueDate == DateTime.Now || a.SubmissioDate == null).ToList();
+
+            ViewBag.TodaysBookReturn = ReturnList;
+
+            return View();
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
-}
 
+
+
+
+
+}

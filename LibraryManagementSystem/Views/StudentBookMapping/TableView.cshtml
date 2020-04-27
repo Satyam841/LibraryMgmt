@@ -36,7 +36,7 @@
         <div class="col-lg-8">
             <div class="row">
                 <table class="table table-bordered table-striped">
-                    <thead>
+                    <thead class="alert-success">
                         <tr>
                             <th>Book Name</th>
                             <th>Issue Date</th>
@@ -48,7 +48,7 @@
                     </thead>
                     @if (Model != null)
                     {
-                        <tbody>
+                        <tbody class="scrollbar-measure"> 
                             @foreach (var item in Model)
                             {
                                 <tr>

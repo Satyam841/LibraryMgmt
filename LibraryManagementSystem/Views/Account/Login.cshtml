@@ -2,77 +2,87 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
+<head>
+    <title></title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url("/Content/Images/bks.jpg ");
+            background-size: cover;
+            padding-top:15%;
+        }
 
+        .login {
+            background-color: white;
+        }
+    </style>
+</head>
 
-    <div class="container">
-        <br />
-        <br />
-        <br />
-        <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4 table-bordered">
-                <div class="card">
-                    <h2 class="card-header">Login  </h2>
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 table-bordered login table-hover">
+            <div class="card">
+                <h2 class="card-header">Login  </h2>
 
-                    <div class="card-body">
-                        <section id="loginForm">
-                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                            {
-                                @Html.AntiForgeryToken()
+                <div class="card-body">
+                    <section id="loginForm">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
 
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Log in" class="btn btn-primary" />
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <div class="checkbox">
-                                            @Html.CheckBoxFor(m => m.RememberMe)
-                                            @Html.LabelFor(m => m.RememberMe)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Log in" class="btn btn-primary" />
-                                    </div>
-                                </div>
-                            }
-                        </section>
-                    </div>
-                    @*    <div class="col-md-4">
-                            <section id="socialLoginForm">
-                                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                            </section>
-                        </div>*@
+                            </div>
+                        }
+                    </section>
                 </div>
-            </div>
-            <div class="col-lg-4">
-
+                @*    <div class="col-md-4">
+                        <section id="socialLoginForm">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
+                    </div>*@
             </div>
         </div>
+        <div class="col-lg-4">
+
+        </div>
     </div>
-
-
-
-
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-
 </div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+
+
+
+
